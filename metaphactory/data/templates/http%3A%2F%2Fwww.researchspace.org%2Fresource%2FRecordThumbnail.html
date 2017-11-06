@@ -1,0 +1,88 @@
+<div>
+  <semantic-context repository='default'>
+    <semantic-switch
+      query='
+        SELECT ?type WHERE {
+          <{{iri.value}}> a ?x .
+          ?type a rso:FundamentalCategory .
+          BIND(rso:FundamentalCategory as ?type) .
+        } LIMIT 1
+      '
+    >
+      <template id="http://www.researchspace.org/ontology/FundamentalCategory">{{>rsp:ItemCardThumbnail noImageThumbnail='../images/fcs/thing_no-image.svg'}}</template>
+      <template id="default">
+        <semantic-context repository='assets'>
+          <semantic-switch
+            query='
+              SELECT ?type WHERE {
+                {
+                  <{{iri.value}}> a <http://www.ontodia.org/schema/v1#diagram> .
+                  BIND(<http://www.ontodia.org/schema/v1#diagram> as ?type) .
+                } UNION {
+                  <{{iri.value}}> a <http://www.metaphacts.com/ontology/PersistedComponent>.
+                  <{{iri.value}}> <http://www.metaphacts.com/ontology/componentType> <http://www.metaphacts.com/ontology/components/semantic-chart> .
+                  <{{iri.value}}> <http://www.metaphacts.com/ontology/componentProps>/<http://www.metaphacts.com/ontology/components/semantic-chart/type> ?type .
+                } UNION {
+                  <{{iri.value}}> a rso:UserDefinedPage .
+                  BIND(rso:UserDefinedPage as ?type) .
+                } UNION {
+                  <{{iri.value}}> a rso:Annotation .
+                  BIND(rso:Annotation as ?type) .
+                } UNION {
+                  <{{iri.value}}> a rso:EX_Assertion .
+                  BIND(rso:EX_Assertion as ?type) .
+                } UNION {
+                  <{{iri.value}}> a sp:Query .
+                  BIND(sp:Query as ?type) .
+                } UNION {
+                  <{{iri.value}}> a crmdig:D9_Data_Object .
+                  BIND(crmdig:D9_Data_Object as ?type) .
+                }
+              } LIMIT 1
+            '
+          >
+            <template id="http://www.researchspace.org/ontology/UserDefinedPage">
+              <semantic-link uri="{{iri.value}}">
+              {{>rsp:ItemCardStaticThumbnail img='../images/clipboard-icons/pages.svg'}}
+              </semantic-link>
+            </template>
+            <template id="http://www.researchspace.org/ontology/Annotation">
+              <semantic-link uri="{{iri.value}}">
+              {{>rsp:ItemCardStaticThumbnail img='../images/clipboard-icons/annotations.svg'}}
+              </semantic-link>
+            </template>
+            <template id='http://www.researchspace.org/ontology/EX_Assertion'>
+              <semantic-link uri="{{iri.value}}">
+              {{>rsp:ItemCardStaticThumbnail img='../images/assertion.svg'}}
+              </semantic-link>
+            </template>
+
+            <!-- saved charts -->
+            <template id='line'><semantic-link uri="{{iri.value}}"><i class='fa fa-line-chart fa-2x' style='color:##2C3E50;'></i></semantic-link></template>
+            <template id='bar'><semantic-link uri="{{iri.value}}"><i class='fa fa-bar-chart fa-2x' style='color:##2C3E50;'></i></semantic-link></template>
+            <template id='pie'><semantic-link uri="{{iri.value}}"><i class='fa fa-pie-chart fa-2x' style='color:##2C3E50;'></i></semantic-link></template>
+            <template id='donut'><semantic-link uri="{{iri.value}}"><i class='fa fa-pie-chart fa-2x' style='color:##2C3E50;'></i></semantic-link></template>
+            <template id='radar'><semantic-link uri="{{iri.value}}"><i class='fa fa-certificate fa-2x' style='color:##2C3E50;'></i></semantic-link></template>
+
+            <!-- diagrams -->
+            <template id='http://www.ontodia.org/schema/v1#diagram'><semantic-link uri="{{iri.value}}"><i class='fa fa-sitemap fa-2x' style='color:##2C3E50;'></i></semantic-link></template>
+
+            <!-- saved search -->
+            <template id='http://spinrdf.org/sp#Query'><semantic-link uri="{{iri.value}}"><i class='fa fa-search fa-2x' style='color:##2C3E50;'></i></semantic-link></template>
+
+            <!-- iiif image -->
+            <template id="http://www.ics.forth.gr/isl/CRMdig/D9_Data_Object">
+              {{> rsp:IIIFThumbnail }}
+            </template>
+
+            <template id="default">
+              <semantic-link class="grid-resource-link" uri="{{iri.value}}">
+                {{>rsp:ItemCardThumbnail noImageThumbnail='../images/no-image.svg'}}
+              </semantic-link>
+            </template>
+          </semantic-switch>
+        </semantic-context>
+      </template>
+    </semantic-switch>
+  </semantic-context>
+</div>

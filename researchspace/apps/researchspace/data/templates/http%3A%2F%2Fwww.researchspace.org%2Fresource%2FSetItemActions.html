@@ -1,0 +1,11 @@
+<bs-dropdown-button pull-right=true bs-style=link title="" id="set-item-actions-{{iri.value}}">
+  <mp-resource-link-container uri='http://www.researchspace.org/resource/FcFrOntodia' urlqueryparam-instance='{{iri.value}}'>
+    <bs-menu-item event-key="explore">Explore (Simple)</bs-menu-item>
+  </mp-resource-link-container>
+  <mp-resource-link-container uri='http://www.researchspace.org/resource/CidocOntodia' urlqueryparam-instance='{{iri.value}}'>
+    <bs-menu-item event-key="explore">Explore (Detailed)</bs-menu-item>
+  </mp-resource-link-container>
+  <mp-set-management-action-remove-set-item>
+    <bs-menu-item event-key=remove>Remove item</bs-menu-item>
+  </mp-set-management-action-remove-set-item>
+</bs-dropdown-button>
